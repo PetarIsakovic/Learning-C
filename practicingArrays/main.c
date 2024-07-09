@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 int main(void){
-	int array[10] = {1, 3, 3, 4, 5, 1, 5, 8, 9, 9};
+	int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	int totalEven = 0;
 	int totalOdd = 0;
 	for(int i = 0; i < 10; i++){
@@ -59,5 +59,25 @@ int main(void){
 	}
 	
 	printf("The total unique numbers in the array is %d\n", count);
+
+	int rotationCount = 3;
+	int arrayHolder[10];
+	
+	for(int i = 0; i < 10; i++){
+		int index = i+rotationCount;
+		if(index >= 10){
+			index -= 10;
+		}
+		arrayHolder[index] = array[i];
+	}
+
+	for(int i = 0; i < 10; i++){
+		array[i] = arrayHolder[i];
+	}
+	printf("The array has been rotated by %d: ", rotationCount);
+	for(int i = 0; i < 10; i++){
+		printf("%d, ", array[i]);
+	}
+	printf("\n");
 	
 }
