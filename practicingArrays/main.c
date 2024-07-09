@@ -60,7 +60,12 @@ int main(void){
 	
 	printf("The total unique numbers in the array is %d\n", count);
 
-	int rotationCount = 3;
+	int rotationCount = 12;
+	
+	while(rotationCount > 10){
+		rotationCount -= 10;
+	}	
+
 	int arrayHolder[10];
 	
 	for(int i = 0; i < 10; i++){
