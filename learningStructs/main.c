@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
 
 struct Student{
 	char name[50];
@@ -15,10 +16,11 @@ void displayStudent(struct Student s1){
 	printf("\n");
 }
 
-void displayAllStudents(struct Student students[]){
+void displayAllStudents(struct Student * students){
 	for(int i = 0; i < 3; i++){
 		displayStudent(students[i]);
 	}
+	free(students);
 }
 
 double average(struct Student student){
@@ -30,7 +32,7 @@ double average(struct Student student){
 	return average;
 }
 
-double highestAverage(struct Student students[]){ //WHY DID I NOT NEED TO SPECIFY THE SIZE OF THE ARRAY HERE?
+double highestAverage(struct Student * students){
 	double highestAverage = average(students[0]);
 	for(int i = 1; i < 3; i++){
 		double newAverage = average(students[i]);
@@ -38,32 +40,32 @@ double highestAverage(struct Student students[]){ //WHY DID I NOT NEED TO SPECIF
 			highestAverage = newAverage;
 		}
 	}
+	free(students);
 	return highestAverage;
 }
 
 int main(void){
-	struct Student students[] = {
-		{
-                	"Petar",
-               		18,
-                	{100, 19, 50, 77}
-        	},
-		{                       
-                        "Petar2",
-                        20,
-                        {100, 23, 100, 99}
-                },
-		{                       
-                        "Petar3",
-                        22,
-                        {31, 33, 30, 99}
-                }
-		
-	};
+	
+	struct Student * students = (struct Student *) malloc(3 * sizeof(struct Student));
+	strcpy(students[0].name, "Petar");
+	students[0].age = 18;
+	int grades1[] = {100,19,50,77};
+	memcpy(students[0].grades, grades1, 4 * sizeof(int));
+
+	strcpy(students[1].name, "Bob");
+        students[1].age = 19;
+	int grades2[] = {100,100,100,99};
+        memcpy(students[1].grades, grades2, 4 * sizeof(int));
+
+	strcpy(students[2].name, "Max");
+        students[2].age = 22;
+	int grades3[] = {100,99,98,97};
+        memcpy(students[2].grades, grades3, 4 * sizeof(int));
 
 	displayAllStudents(students);
 	printf("THE AVERAGE IS: %lf\n", average(students[0]));
 	
 	printf("THE HIGHEST AVERAGE IS: %lf\n", highestAverage(students));
+	free(students);
 	return 0;
 }
