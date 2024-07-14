@@ -45,8 +45,8 @@ double highestAverage(struct Student * students){
 }
 
 int main(void){
-	
-	struct Student * students = (struct Student *) malloc(3 * sizeof(struct Student));
+	struct Student * students = NULL;	
+	students = (struct Student *) malloc(3 * sizeof(struct Student));
 	strcpy(students[0].name, "Petar");
 	students[0].age = 18;
 	int grades1[] = {100,19,50,77};
