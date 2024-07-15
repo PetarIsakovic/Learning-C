@@ -3,7 +3,7 @@
 
 struct Node{
 	int data;
-	struct Node *next; // why does this have to be a pointer
+	struct Node *next;
 };
 
 void display(struct Node *head){
@@ -20,7 +20,6 @@ void display(struct Node *head){
 	}
 }
 
-//not sure how to throw an error if index is less then zero or greater than size of LinkedLi$ AND HOW DO I USE FREE IN THIS SITUATION
 struct Node* delete(struct Node *head, int index){
 	if(index == 0){
 		head = head->next;
@@ -35,6 +34,7 @@ struct Node* delete(struct Node *head, int index){
 	return head;
 }
 
+
 struct Node* insertAtBeginning(struct Node *head, int value){
         struct Node *tmp = (struct Node *)malloc(sizeof(struct Node));
         tmp->data = value;
@@ -42,18 +42,20 @@ struct Node* insertAtBeginning(struct Node *head, int value){
         return tmp;
 }
 
+struct Node* createNode(int value){
+	struct Node *tmp = (struct Node *)(malloc(sizeof(struct Node)));
+	tmp->data = value;
+	tmp->next = NULL;
+	return tmp;
+}
 
-//not sure how to throw an error if index is less then zero or greater than size of LinkedList
 struct Node* insertAtSpecificIndex(struct Node *head, int value, int index){
-	if(index == 0 && head == NULL){
-		head = (struct Node *)malloc(sizeof(struct Node));
-		head->data = value;
-	}
-	else if(index == 0){
+	struct Node *tmp = head;
+
+	if(index == 0){
 		head = insertAtBeginning(head, value);
 	}
 	else{
-		struct Node *tmp = head;
 		for(int i = 0; i < index-1; i++){
 			tmp = tmp->next;
 		}
@@ -67,9 +69,9 @@ struct Node* insertAtSpecificIndex(struct Node *head, int value, int index){
 
 
 struct Node* insertInMiddle(struct Node *head, int value){
+	struct Node *newNode = createNode(value);	
 	if(head == NULL){
-		head = (struct Node *)malloc(sizeof(struct Node));
-		head->data = value;
+		head = newNode;
 	}
 	else{
 		int sizeOfLinkedList = 0;
@@ -83,8 +85,7 @@ struct Node* insertInMiddle(struct Node *head, int value){
 			tmp = tmp->next;
 		}
 		struct Node *holder = tmp->next;
-		tmp->next = (struct Node *)malloc(sizeof(struct Node));
-		tmp->next->data = value;
+		tmp->next = newNode;
 		tmp->next->next = holder;
 	}
 	return head;
@@ -102,7 +103,6 @@ struct Node* insertAtEnd(struct Node *head, int value){
 		}
 		struct Node *newNode = (struct Node *)(malloc(sizeof(struct Node)));
 		newNode->data = value;
-
 		tmp->next = newNode;
 	}
 	return head;
