@@ -15,17 +15,14 @@ int fib(int n){
 }
 
 int greatestCommonDivisor(int n1, int n2, int gcd){
-	printf("WORK??\n");
 	if(n1 == 1 || n2 == 1){
 		return gcd;
 	}
 	else if(n1 % 2 == 0 && n2 % 2 == 0){
-		printf("WREEE\n");
 		gcd *= 2;
 		gcd = greatestCommonDivisor(n1/2, n2/2, gcd);
 	}
 	else if(n1 % 3 == 0 && n2 % 3 == 0){
-		printf("WOOSH\n");
 		gcd *= 3;
 		gcd = greatestCommonDivisor(n1/3, n2/3, gcd);
 	}
