@@ -159,9 +159,10 @@ int main(){
 	int length = 10;
         int width = 10;
 	int** array3 = (int **)malloc(length * sizeof(int *));
-	for(int i = 0; i < length; i++){
-		array3[i] = (int *)malloc(sizeof(int));
-	}
+        for(int i = 0; i < length; i++){
+                array3[i] = (int *)malloc(sizeof(int));
+        }
+
 
 	int*** pointerToArray = &array3;
 	
